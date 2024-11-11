@@ -40,78 +40,116 @@ class _AuthScreenState extends State<AuthScreen> {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const Text(
-              'Welcome',
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
-            ),
-            ListTile(
-              title: const Text(
-                'Create Account',
-                style: TextStyle(fontWeight: FontWeight.bold),
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Column(
+            children: [
+              const Text(
+                'خوش آمدید',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
               ),
-              leading: Radio(
-                activeColor: GlobalVariables.secondaryColor,
-                value: Auth.signup,
-                groupValue: _auth,
-                onChanged: (Auth? val) {
-                  setState(() {
-                    _auth = val!;
-                  });
-                },
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            if (_auth == Auth.signup)
-              Container(
-                padding: const EdgeInsets.all(8),
-                color: GlobalVariables.backgroundColor,
-                child: Form(
-                  key: _signUpFormKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        controller: _nameController,
-                        hintText: 'Name',
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _emailController,
-                        hintText: 'Email',
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        controller: _passwordController,
-                        hintText: 'Password',
-                      ),
-                      const SizedBox(height: 10),
-                      CustomButton(
-                        onTap: () {},
-                        text: 'Sign Up',
-                      ),
-                    ],
-                  ),
+              ListTile(
+                tileColor: _auth == Auth.signup
+                    ? GlobalVariables.backgroundColor
+                    : GlobalVariables.greyBackgroundCOlor,
+                title: const Text(
+                  'ایجاد اکانت',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                leading: Radio(
+                  activeColor: GlobalVariables.secondaryColor,
+                  value: Auth.signup,
+                  groupValue: _auth,
+                  onChanged: (Auth? val) {
+                    setState(() {
+                      _auth = val!;
+                    });
+                  },
                 ),
               ),
-            ListTile(
-              title: const Text(
-                'Sign-In.',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              if (_auth == Auth.signup)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: GlobalVariables.backgroundColor,
+                  child: Form(
+                    key: _signUpFormKey,
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                          controller: _nameController,
+                          hintText: 'نام',
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: _emailController,
+                          hintText: 'ایمیل',
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: _passwordController,
+                          hintText: 'پسورد',
+                        ),
+                        const SizedBox(height: 10),
+                        CustomButton(
+                          onTap: () {},
+                          text: 'ثبت نام',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ListTile(
+                tileColor: _auth == Auth.signin
+                    ? GlobalVariables.backgroundColor
+                    : GlobalVariables.greyBackgroundCOlor,
+                title: const Text(
+                  'ورود',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                leading: Radio(
+                  activeColor: GlobalVariables.secondaryColor,
+                  value: Auth.signin,
+                  groupValue: _auth,
+                  onChanged: (Auth? val) {
+                    setState(
+                      () {
+                        _auth = val!;
+                      },
+                    );
+                  },
+                ),
               ),
-              leading: Radio(
-                activeColor: GlobalVariables.secondaryColor,
-                value: Auth.signin,
-                groupValue: _auth,
-                onChanged: (Auth? val) {
-                  setState(
-                    () {
-                      _auth = val!;
-                    },
-                  );
-                },
-              ),
-            ),
-          ],
+              if (_auth == Auth.signin)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: GlobalVariables.backgroundColor,
+                  child: Form(
+                    key: _signInFormKey,
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                          controller: _emailController,
+                          hintText: 'ایمیل',
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: _passwordController,
+                          hintText: 'پسورد',
+                        ),
+                        const SizedBox(height: 10),
+                        CustomButton(
+                          onTap: () {},
+                          text: 'ادامه',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       )),
     );
